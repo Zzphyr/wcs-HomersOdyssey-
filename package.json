@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Wild server",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "wilder",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.17.1",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zzphyr/wcs-HomersOdyssey-.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zzphyr/wcs-HomersOdyssey-/issues"
+  },
+  "homepage": "https://github.com/Zzphyr/wcs-HomersOdyssey-#readme"
+}

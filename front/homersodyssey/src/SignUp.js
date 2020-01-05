@@ -8,7 +8,8 @@ class SignUp extends Component {
       password: "monPassw0rd",
       passwordBis: "monPassw0rd",
       name: "James",
-      lastname: "Bond"
+      lastname: "Bond",
+      flash: "",
     }
   }
 
@@ -27,15 +28,30 @@ class SignUp extends Component {
   updateLastnameField = (event) => {
     this.setState({lastname: event.target.value});
   }  
-  
+  // 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("A name was submitted: ", this.state)
+    console.log("A name was submitted: ", this.state);
+    // remember to yarn start both backend and frontend!
+    fetch("/auth/signup",
+    {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(this.state),
+    })
+    .then(res => res.json())
+    .then(
+        res => this.setState({"flash": res.flash}),
+        err => this.setState({"flash": err.flash})
+    )
   }
   
 
   render() {
-    const { email } = this.state;
+    //const { email } = this.state;
+    //console.log(this.state)
     return(
       <> 
         <h1>{JSON.stringify(this.state, 1, 1)}</h1>

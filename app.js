@@ -31,6 +31,7 @@ app.use(function(req, res, next) {
 
 
 // launch the node server
-let  server  =  app.listen( process.env.PORT  ||  3000, function(){
+// changed backend port to 5000
+let  server  =  app.listen( process.env.PORT  ||  5000, function(){
    console.log('Listening on port '  +  server.address().port);
 });

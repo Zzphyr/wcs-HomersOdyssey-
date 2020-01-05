@@ -28,7 +28,7 @@ class SignUp extends Component {
   updateLastnameField = (event) => {
     this.setState({lastname: event.target.value});
   }  
-  // 
+  
   handleSubmit = (e) => {
     e.preventDefault();
     console.log("A name was submitted: ", this.state);

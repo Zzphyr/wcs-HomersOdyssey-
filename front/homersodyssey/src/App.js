@@ -1,14 +1,22 @@
 import React from 'react';
 import './App.css';
 import SignUp from './SignUp';
+import SignIn from './SignIn';
+import Profile from './Profile';
 // got bellow from https://stackoverflow.com/questions/58432694/cannot-import-material-ui-core-styles-muithemeprovider
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Grid, Paper } from "@material-ui/core";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 const theme = createMuiTheme();
 
 // to open the react app, remember to get inside the "front" folder then yarn start!
 function App() {
+  // to allow redirect and logout
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  //const handleLogin = () => {};
+
   return (
     <div>
       <MuiThemeProvider theme={theme}>
@@ -33,7 +41,25 @@ function App() {
                 <Grid  
                   item xs={12} sm={6}
                 >
-                  <SignUp />
+                  <BrowserRouter>
+                    <Switch>
+                      <Route exact path="/">
+                        <SignIn />
+                      </Route>
+                      <Route path="/signin">
+                        <SignIn />
+                      </Route>
+                      <Route path="/signin">
+                        <SignIn />
+                      </Route>
+                      <Route path="/signup">
+                        <SignUp />
+                      </Route>
+                      <Route path="/profile">
+                        <Profile />
+                      </Route>
+                    </Switch>
+                  </BrowserRouter>
                 </Grid>
               </Grid>
             </Paper>

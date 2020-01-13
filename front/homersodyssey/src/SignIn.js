@@ -1,18 +1,15 @@
 import React, {Component} from 'react';
 import { Button, Snackbar, TextField } from '@material-ui/core';
-import { Link, Redirect } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
-class SignUp extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "mon@email.com",
-      password: "monPassw0rd",
-      passwordBis: "monPassw0rd",
-      name: "James",
-      lastname: "Bond",
+      email: "",
+      password: "",
       flash: "",
-      isSnackOpen: false
+      isSnackOpen: false,
     }
   }
 
@@ -22,34 +19,26 @@ class SignUp extends Component {
   updatePasswordField = (event) => {
     this.setState({password: event.target.value});
   }  
-  updatePasswordBisField = (event) => {
-    this.setState({passwordBis: event.target.value});
-  }  
-  updateNameField = (event) => {
-    this.setState({name: event.target.value});
-  }  
-  updateLastnameField = (event) => {
-    this.setState({lastname: event.target.value});
-  }  
   
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("A name was submitted: ", this.state);
-    // remember to yarn start both backend and frontend!
-    fetch("/auth/signup",
-    {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify(this.state),
-    })
-    .then(res => res.json())
-    .then(
-      res => this.setState({"flash": res.flash}),
-      err => this.setState({"flash": err.flash})
-    ).then(<Redirect to="/" />)
-  }
+   handleSubmit = (e) => {
+      e.preventDefault();
+   /*     console.log("A name was submitted: ", this.state);
+      // remember to yarn start both backend and frontend!
+      fetch("/auth/signin",
+      {
+         method: 'POST',
+         headers: new Headers({
+         'Content-Type': 'application/json'
+         }),
+         body: JSON.stringify(this.state),
+      })
+      .then(res => res.json())
+      .then(
+         res => this.setState({"flash": res.flash}),
+         err => this.setState({"flash": err.flash})
+      ).then(<Redirect to="/" />) */
+      this.props.history.push('/profile');
+   }
 
   handleSnackOpen = () => {
     this.setState((prevState) => ({
@@ -71,16 +60,14 @@ class SignUp extends Component {
 
   render() {
     const { flash, isSnackOpen } = this.state;
-    //console.log("in render",this.state)
+    //console.log(this.state)
     return(
       <> 
         <h1>{JSON.stringify(this.state, 1, 1)}</h1>
+        <h2>SignIn page - remove this h2 later</h2>
         <form onSubmit={this.handleSubmit}>
           <TextField label="Email" type="email" name="email" onChange={this.updateEmailField} />
           <TextField label="Password" type="password" name="password" onChange={this.updatePasswordField} />
-          <TextField label="Re-enter password" type="password" name="passwordBis" onChange={this.updatePasswordBisField} />
-          <TextField label="Name" type="name" name="name" onChange={this.updateNameField} />
-          <TextField label="Lastname" type="lastname" name="lastname" onChange={this.updateLastnameField} />
           <Button 
             type="submit"
             variant="contained" 
@@ -89,7 +76,7 @@ class SignUp extends Component {
             >Submit
           </Button>
         </form>
-        <Link to="/signin">SignIn</Link>
+        <Link to="/signup">Signup</Link>
         <Snackbar
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           open={isSnackOpen}
@@ -102,4 +89,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default withRouter(SignIn);
